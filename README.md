@@ -1,7 +1,5 @@
 # 경북대학교 컴퓨터학부 L&C 동아리 Server
 
-<hr>
-
 ## How to Start
 
 ```bash
