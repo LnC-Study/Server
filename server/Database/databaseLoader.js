@@ -27,20 +27,20 @@ function connect_database(app, config){
 }
 
 function init_schema(app, config){
-    var length_of_schema = config.DB_SCHEMAS.length;
-    console.log('Schemas[%d]', length_of_schema);
+    var lengthOfSchema = config.DB_SCHEMAS.length;
+    console.log('Schemas[%d]', lengthOfSchema);
 
-    for( var idx = 0; idx < length_of_schema; idx++){
-        var current_item = config.DB_SCHEMAS[idx];
-        var current_schema = require(current_item.file).createSchema(mongoose);
-        console.log('\tRead [%s] module, then set the schema.', current_item.file);
+    for( var idx = 0; idx < lengthOfSchema; idx++){
+        var currentItem = config.DB_SCHEMAS[idx];
+        var currentSchema = require(currentItem.file).createSchema(mongoose);
+        console.log('\tRead [%s] module, then set the schema.', currentItem.file);
 
-        var current_model = mongoose.model(current_item.collection, current_schema);
-        console.log('\tSet the model for [%s] collection.', current_item.collection);
+        var currentModel = mongoose.model(currentItem.collection, currentSchema);
+        console.log('\tSet the model for [%s] collection.', currentItem.collection);
 
-        databaseLoader[current_item.schemaName] = current_schema;
-        databaseLoader[current_item.modelName] = current_model;
-        console.log('\tRegister: Schema name[%s], Model name[%s] on database object.', current_item.schemaName, current_item.modelName);
+        databaseLoader[currentItem.schemaName] = currentSchema;
+        databaseLoader[currentItem.modelName] = currentModel;
+        console.log('\tRegister: Schema name[%s], Model name[%s] on database object.', currentItem.schemaName, currentItem.modelName);
     }
 
     app.set('database', databaseLoader);
