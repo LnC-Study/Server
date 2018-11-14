@@ -7,7 +7,7 @@ databaseLoader.init = function(app, config){
 }
 
 function connect_database(app, config){
-    console.log('\tCalled connect().');
+    console.log('Called connect().');
 
     mongoose.Promise = global.Promise;
     mongoose.connect(config.DB_URL, {useMongoClient:true});
@@ -16,19 +16,19 @@ function connect_database(app, config){
     databaseLoader.db.on('error', console.error.bind(console, 'Mongoose connection error.'));
 
     databaseLoader.db.on('open', function(){
-        console.log('\tConnected with database: ', config.DB_URL);
+        console.log('Connected with database: ', config.DB_URL);
         init_schema(app, config);
     });
 
     databaseLoader.db.on('disconnected', function(){
-        console.log('\tDisconnected with database. Retry after 5sec.');
+        console.log('Disconnected with database. Retry after 5sec.');
         setInterval(connect_database, 5000);
     });
 }
 
 function init_schema(app, config){
     var length_of_schema = config.DB_SCHEMAS.length;
-    console.log('\tSchemas[%d]', length_of_schema);
+    console.log('Schemas[%d]', length_of_schema);
 
     for( var idx = 0; idx < length_of_schema; idx++){
         var current_item = config.DB_SCHEMAS[idx];

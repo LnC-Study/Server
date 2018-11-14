@@ -10,6 +10,8 @@ schema.createSchema = function(mongoose){
     boardSchema.static('delete_by_number', function(_number, callback){
         return this.deleteOne( {number: _number}, callback);
     });
+
+    return boardSchema;
 };
 
 module.exports = schema;

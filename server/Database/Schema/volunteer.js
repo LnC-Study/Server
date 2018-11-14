@@ -7,9 +7,12 @@ schema.createSchema = function(mongoose){
     volunteerSchema.static('get_all_posts', function(callback){
         return this.find({}, callback);
     });
+
     volunteerSchema.static('delete_by_name', function(_name, callback){
         return this.deleteOne( { center: _name}, callback);
     });
+
+    return volunteerSchema;
 };
 
 module.exports = schema;

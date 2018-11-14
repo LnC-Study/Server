@@ -10,6 +10,8 @@ schema.createSchema = function(mongoose){
     developSchema.static('delete_by_name', function( _name, callback){
         return this.deleteOne( { project: _name}, callback);
     });
+
+    return developSchema;
 };
 
 module.exports = schema;

@@ -10,6 +10,8 @@ schema.createSchema = function(mongoose){
     noticeSchema.static('delete_by_number', function(_number, callback){
         return this.deleteOne( {number: _number}, callback);
     });
+
+    return noticeSchema;
 };
 
 module.exports = schema;

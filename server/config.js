@@ -35,54 +35,54 @@ module.exports = {
         ],
     DB_MODELS: {
         user: {
-            email: {type: string, required: true}
-            , userName: {type: string, required: true}
-            , hashedPassword: {type: string, required: true}
-            , authority: {type: string, 'default': 'user'}
-            , volunteering: {type: array, 'default': []}
-            , developing: {type: array, 'default': []}
-            , salt: {type: string, required: true}
-            , createdAt: {type: date, 'default': Date.now}
+            email: {type: String, required: true}
+            , userName: {type: String, required: true}
+            , hashedPassword: {type: String, required: true}
+            , authority: {type: String, 'default': 'user'}
+            , volunteering: {type: Array, 'default': []}
+            , developing: {type: Array, 'default': []}
+            , salt: {type: String, required: true}
+            , createdAt: {type: Date, 'default': Date.now}
         },
         notice: {
-            number: {type: int, unique:true}
-            , writer: {type: string, required: true}
-            , title: {type: string, required: true}
-            , description: {type: string, 'default': ''}
-            , createdAt: {type: date, 'default': Date.now}
-            , updatedAt: {type: date, 'default': Date.now}
+            number: {type: Number, unique:true}
+            , writer: {type: String, required: true}
+            , title: {type: String, required: true}
+            , description: {type: String, 'default': ''}
+            , createdAt: {type: Date, 'default': Date.now}
+            , updatedAt: {type: Date, 'default': Date.now}
         },
         board:{
-            number: {type: int, unique:true}
-            , writer: {type: string, required: true}
-            , title: {type: string, required: true}
-            , description: {type: string, 'default': ''}
-            , createdAt: {type: date, 'default': Date.now}
-            , updatedAt: {type: date, 'default': Date.now}
+            number: {type: Number, unique:true}
+            , writer: {type: String, required: true}
+            , title: {type: String, required: true}
+            , description: {type: String, 'default': ''}
+            , createdAt: {type: Date, 'default': Date.now}
+            , updatedAt: {type: Date, 'default': Date.now}
         },
         volunteer:{
-            number: {type: int, unique: true}
-            , center: {type: string, required: true}
-            , location: {type: string, 'default': ''}
-            , leader: {type: string, required: true}
-            , description: {type: string, 'default': ''}
-            , member: {type: array, 'default': []}
-            , personnel: {type: int, 'default': 9999}
+            number: {type: Number, unique: true}
+            , center: {type: String, required: true}
+            , location: {type: String, 'default': ''}
+            , leader: {type: String, required: true}
+            , description: {type: String, 'default': ''}
+            , member: {type: Array, 'default': []}
+            , personnel: {type: Number, 'default': 9999}
             , date : {
-                startDate: {type: date, required:true}
-                , endDate: {type: date, required: true}
+                startDate: {type: Date, required:true}
+                , endDate: {type: Date, required: true}
             }
         },
         develop:{
-            number: {type: int, unique: true}
-            , project: {type: string, required: true}
-            , leader: {type: string, required: true}
-            , description: {type: string, 'default': ''}
-            , member: {type: array, 'default': []}
-            , personnel: {type: int, 'default': 9999}
+            number: {type: Number, unique: true}
+            , project: {type: String, required: true}
+            , leader: {type: String, required: true}
+            , description: {type: String, 'default': ''}
+            , member: {type: Array, 'default': []}
+            , personnel: {type: Number, 'default': 9999}
             , date : {
-                startDate: {type: date, required:true}
-                , endDate: {type: date, required: true}
+                startDate: {type: Date, required:true}
+                , endDate: {type: Date, required: true}
             }
         }
     },
