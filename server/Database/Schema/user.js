@@ -58,6 +58,9 @@ schema.createSchema = function(mongoose){
     }, 'No hashed_password column value');
 
     /* methods on model object */
+    userSchema.static('find_by_email', function(_email, callback){
+        return this.find({email: _email}, callback);
+    });
     userSchema.static('delete_by_number', function(_number, callback){
         return this.deleteOne( {number: _number}, callback);
     });

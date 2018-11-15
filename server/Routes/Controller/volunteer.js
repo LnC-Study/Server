@@ -19,6 +19,7 @@ var render_volunteer = function(req, res){
                     , description: result[idx]._doc.description
                     , member: result[idx]._doc.member
                     , date: result[idx].date
+                    , weeklyRecord: result[idx].weeklyRecord
                 })
             }
 
@@ -82,7 +83,7 @@ var register_volunteer_center = function(req, res){
             console.log('# Successfully add volunteer data');
             console.log( _submittedCenterData);
             return res.status(201).end();
-        })
+        });
     }
     else
         return res.status(500).json({error: 'Error occurred in loading database'}).end();

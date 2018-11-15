@@ -1,4 +1,5 @@
 module.exports = {
+    SERVER_HOST: 'http://49.236.134.66:',
     SERVER_PORT: 3000,
     DB_URL: 'mongodb://localhost:27017/local',
     DB_SCHEMAS: [
@@ -43,6 +44,11 @@ module.exports = {
             , developing: {type: Array, 'default': []}
             , salt: {type: String, required: true}
             , createdAt: {type: Date, 'default': Date.now}
+            , privateInfo: {
+                studentID: {type:Number}
+                , birthDate: {type:Date}
+                , id1365: {type: String}
+            }
         },
         notice: {
             number: {type: Number, unique:true}
@@ -72,6 +78,7 @@ module.exports = {
                 startDate: {type: Date, required:true}
                 , endDate: {type: Date, required: true}
             }
+            ,weeklyRecord:{ type:Array, 'default': []}
         },
         develop:{
             project: {type: String, required: true}
