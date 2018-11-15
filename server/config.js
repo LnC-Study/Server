@@ -74,8 +74,7 @@ module.exports = {
             }
         },
         develop:{
-            number: {type: Number, unique: true}
-            , project: {type: String, required: true}
+            project: {type: String, required: true}
             , leader: {type: String, required: true}
             , description: {type: String, 'default': ''}
             , member: {type: Array, 'default': []}
@@ -103,7 +102,13 @@ module.exports = {
             ,{file: './Controller/develop', path: '/develop/delete/:project', method: 'delete_develop_project', type:'delete'}
 
             ,{file: './Controller/notice', path: '/notice', method: 'render_notice', type:'get'}
+            ,{file: './Controller/notice', path: '/notice', method: 'write_notice', type:'post'}
+            ,{file: './Controller/notice', path: '/notice/:number', method: 'render_notice_number', type:'get'}
+
             ,{file: './Controller/board', path: '/board', method: 'render_board', type:'get'}
+            ,{file: './Controller/board', path: '/board', method: 'write_board', type:'post'}
+            ,{file: './Controller/board', path: '/board/:number', method: 'render_board_number', type:'get'}
+
             ,{file: './Controller/intro', path: '/intro', method: 'render_intro', type:'get'}
             ,{file: './Controller/myPage', path: '/mypage', method: 'render_myPage', type:'get'}
         ]
