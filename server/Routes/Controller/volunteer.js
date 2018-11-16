@@ -6,29 +6,24 @@ var render_volunteer = function(req, res){
         database.volunteerModel.get_all_centers( function(err, result){
             if( err){
                 console.log('Error occurred in finding centers');
-                return res.status(500).json({error: 'Error occurred in finding centers'}).end();
+                return res.status(500).end();
             }
 
-            var _output = [];
+            var _output = {};
             for (var idx = 0; idx < result.length; idx++){
-                _output.push({
-                    number: result[idx]._doc.number
-                    , center: result[idx]._doc.center
-                    , location: result[idx]._doc.location
-                    , leader: result[idx]._doc.leader
-                    , description: result[idx]._doc.description
-                    , member: result[idx]._doc.member
-                    , date: result[idx].date
-                    , weeklyRecord: result[idx].weeklyRecord
-                })
+                var _curSemester = result[idx]._doc.semester;
+
+                if( _curSemester in _output == false)
+                    _output._curSemester = [];
+
+                _output[_curSemester].push( result[idx]._doc);
             }
 
-            return res.status(200).render('volunteer', {length: result.length,
-                                                        data: _output}).end();
+            return res.status(200).render('volunteer', {data: _output});
         });
     }
     else
-        return res.status(500).json({error: 'Error occurred in loading database'}).end();
+        return res.status(500).json({error: 'Error occurred in loading database'});
 }
 
 var render_volunteer_center = function(req, res){
@@ -40,13 +35,13 @@ var render_volunteer_center = function(req, res){
         database.volunteerModel.get_by_center( _submittedCenter, function(err, result){
             if(err){
                 console.log('Error occurred in finding center');
-                return res.status(500).json({error: 'Error occurred in finding center'}).end();
+                return res.status(500).end();
             }
 
             if( result.length == 0)
-                return res.status(404).render('404Err').end();
+                return res.status(404).render('404Err');
 
-            return res.status(200).render('center', {data: result._doc}).end();
+            return res.status(200).render('center', {data: result[0]._doc}).end();
         })
     }
 }
@@ -64,16 +59,13 @@ var register_volunteer_center = function(req, res){
     if( database.db){
         var _centerNumber = database.volunteerModel.get_volunteer_number();
         var _centerData = new database.volunteerModel({
-            number: _centerNumber
-            , center: _submittedCenter
+            center: _submittedCenter
+            , semester: _submittedCenterData.semester
             , location: _submittedCenterData.location
             , leader: _submittedCenterData.leader
             , description: _submittedCenterData.description
             , personnel: _submittedCenterData.personnel
-            , date: {
-                startDate : _submittedCenterData.startDate
-                , endDate: _submittedCenterData.endDate
-            }
+            , time: _submittedCenterData.start + '~' + _submittedCenterData.end
         });
 
         // Save volunteer object

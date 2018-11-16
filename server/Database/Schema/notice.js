@@ -6,7 +6,8 @@ schema.createSchema = function(mongoose){
 
     /* methods on model object */
     noticeSchema.static('get_all_notices', function(callback){
-        return this.find({}, callback);
+        // sort descending by number
+        return this.find({},{'sort':['number','asc']}, callback);
     });
     noticeSchema.static('get_by_number', function(_number, callback){
         return this.find({number: _number}, callback);

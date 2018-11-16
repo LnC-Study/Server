@@ -24,7 +24,7 @@ function init_routes(app, router){
         else // type == 'delete'
             router.route(currentItem.path).delete(currentModule[currentItem.method]);
 
-        console.log('\tSet router module[%s] - path:[%s]', currentItem.method, currentItem.path);
+        console.log('\tSet router module[%s], path:[%s], method:[%s]', currentItem.method, currentItem.path, currentItem.type);
     }
 }
 

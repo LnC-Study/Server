@@ -59,15 +59,29 @@ var register_user = function(req, res){
         // Save user object
         _userData.save( function(err){
             if(err)
-                return res.status(500).json({error: 'Error occurred in creating model'}).end();
+                return res.status(500);
             console.log('# Successfully register user data');
             console.log( _submittedUserData);
-            return res.status(201).end();
+            return res.status(201);
         });
     }
     else
         return res.status(500).end();
 }
 
+var render_signIn = function(req, res){
+    console.log('# API called: Render intro');
+    console.log('Headers: ', req.headers);
+    return res.render('./myPage/signIn');
+};
+
+var render_signUp = function(req,res){
+    console.log('# API called: Render intro');
+    console.log('Headers: ', req.headers);
+    return res.render('./myPage/signUp');
+};
+
 module.exports.authorize_user = authorize_user;
 module.exports.register_user = register_user;
+module.exports.render_signIn = render_signIn;
+module.exports.render_signUp = render_signUp;

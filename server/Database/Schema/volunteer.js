@@ -6,7 +6,7 @@ schema.createSchema = function(mongoose){
 
     /* methods on model object */
     volunteerSchema.static('get_all_centers', function(callback){
-        return this.find({}, callback);
+        return this.find({},{'sort':['number','asc']}, callback);
     });
     volunteerSchema.static('get_by_center', function( _center, callback){
         return this.find({ center: _center}, callback);

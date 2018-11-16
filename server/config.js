@@ -67,34 +67,32 @@ module.exports = {
             , updatedAt: {type: Date, 'default': Date.now}
         },
         volunteer:{
-            number: {type: Number, unique: true}
-            , center: {type: String, required: true}
+            center: {type: String, required: true}
+            , semester: {type: String, required: true}
             , location: {type: String, 'default': ''}
             , leader: {type: String, required: true}
             , description: {type: String, 'default': ''}
             , member: {type: Array, 'default': []}
             , personnel: {type: Number, 'default': 9999}
-            , date : {
-                startDate: {type: Date, required:true}
-                , endDate: {type: Date, required: true}
-            }
+            , time: {type: String, required: true}
             ,weeklyRecord:{ type:Array, 'default': []}
         },
         develop:{
             project: {type: String, required: true}
+            , semester: {type: String, required: true}
             , leader: {type: String, required: true}
             , description: {type: String, 'default': ''}
             , member: {type: Array, 'default': []}
             , personnel: {type: Number, 'default': 9999}
-            , date : {
-                startDate: {type: Date, required:true}
-                , endDate: {type: Date, required: true}
-            }
         }
     },
     ROUTE_INFOS: [
-            {file: './Controller/user', path: '/sign-in', method: 'authorize_user', type:'get'}
-            ,{file: './Controller/user', path: '/sign-up', method: 'register_user', type:'post'}
+            {file: './Controller/main', path:'/', method: 'render_main', type:'get'}
+            ,{file: './Controller/intro', path: '/intro', method: 'render_intro', type:'get'}
+            ,{file: './Controller/myPage', path: '/mypage/:username', method: 'render_myPage', type:'get'}
+
+            ,{file: './Controller/user', path: '/signin', method: 'render_signIn', type:'get'}
+            ,{file: './Controller/user', path: '/signup', method: 'render_signUp', type:'post'}
 
             ,{file: './Controller/volunteer', path: '/volunteer', method: 'render_volunteer', type:'get'}
             ,{file: './Controller/volunteer', path: '/volunteer/:center', method: 'render_volunteer_center', type:'get'}
@@ -115,8 +113,7 @@ module.exports = {
             ,{file: './Controller/board', path: '/board', method: 'render_board', type:'get'}
             ,{file: './Controller/board', path: '/board', method: 'write_board', type:'post'}
             ,{file: './Controller/board', path: '/board/:number', method: 'render_board_number', type:'get'}
-
-            ,{file: './Controller/intro', path: '/intro', method: 'render_intro', type:'get'}
-            ,{file: './Controller/myPage', path: '/mypage', method: 'render_myPage', type:'get'}
-        ]
+        ],
+    MAIN_NOTICES: 3,
+    MAIN_VOLUNTEERS: 3
 }

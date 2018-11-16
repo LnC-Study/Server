@@ -6,28 +6,25 @@ var render_develop = function(req, res){
         database.developModel.get_all_projects( function(err, result){
             if(err){
                 console.log('Error occurred in finding projects');
-                return res.status(500).json({error: 'Error occurred in finding projects'}).end();
+                return res.status(500).end();
             }
 
-            var _output = [];
+            var _output = {};
             for (var idx = 0; idx < result.length; idx++){
-                _output.push({
-                    project: result[i]._doc.project
-                    , leader: result[i]._doc.leader
-                    , description: result[i]._doc.description
-                    , member: result[i]._doc.member
-                    , personnel: result[i]._doc.personnel
-                    , date: result[i]._doc.date
-                })
+                var _curSemester = result[idx]._doc.semester;
+
+                if( _curSemester in _output == false)
+                    _output._curSemester = [];
+
+                _output[_curSemester].push( result[idx]._doc)
             }
 
-            return res.status(200).render('develop', {length: result.length,
-                                                      data: _output}).end();
+            return res.status(200).render('develop', {data:_output});
         });
     }
     else
         return res.status(500).json({error: 'Error occurred in loading database'}).end();
-}
+};
 
 var render_develop_project = function(req, res){
     console.log('# API called: Get project');
@@ -42,14 +39,14 @@ var render_develop_project = function(req, res){
             }
 
             if( result.length == 0)
-                return res.status(404).render('404Err').end();
+                return res.status(404).render('404Err');
 
-            return res.status(200).render('project', {data: result._doc}).end();
+            return res.status(200).render('project', result._doc);
         });
     }
     else
-        return res.status(500).json({error:'Error occurred in loading database'}).end();
-}
+        return res.status(500);
+};
 
 var register_develop_project = function(req, res){
     console.log('# API called: Register develop project');
@@ -64,26 +61,23 @@ var register_develop_project = function(req, res){
     if( database.db){
         var _projectData = new database.developModel({
             project: _submittedProject
+            , semester: _submittedProjectData.semester
             , leader: _submittedProjectData.leader
             , description: _submittedProjectData.description
             , personnel: _submittedProjectData.personnel
-            , date: {
-                startDate: _submittedProjectData.startDate
-                , endDate: _submittedProjectData.endDate
-            }
         });
 
         // Save project object
         _projectData.save( function(err){
             if(err)
-                return res.status(500).json({error: 'Error occurred in creating develop model'}).end();
+                return res.status(500).end();
             console.log('# Successfully add develop data');
             console.log( _submittedProjectData);
             return res.status(201).end();
         });
     }
     else
-        return res.status(500).json({error: 'Error occurred in loading database'}).end();
+        return res.status(500).end();
 }
 
 var apply_develop_project = function(req, res){

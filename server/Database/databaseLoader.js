@@ -44,7 +44,7 @@ function init_schema(app, config){
     }
 
     app.set('database', databaseLoader);
-    console.log('\tSuccessfully register the database object on app object.');
+    console.log('Successfully register the database object on app object.');
 }
 
 module.exports = databaseLoader;
