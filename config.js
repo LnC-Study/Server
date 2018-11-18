@@ -1,5 +1,5 @@
 module.exports = {
-    // SERVER_HOST: 'http://49.236.134.66:',
+    // SERVER_HOST: 'http://49.236.134.66:'
     SERVER_HOST: 'http://localhost:',
     SERVER_PORT: 3000,
     // JSONRPC_API_PATH: '/rpc',
